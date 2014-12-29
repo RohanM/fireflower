@@ -15,6 +15,7 @@
 LedStrip ledStrips[NUM_STRIPS];
 int counter;
 int inStateCounter;
+Hammock hammock;
 
 void setup() {
   for(int i=0; i<NUM_STRIPS; i++) {
@@ -30,6 +31,9 @@ void setup() {
   FastLED.addLeds<WS2811, LED_PIN_4, BRG>(ledStrips[4].leds(), NUM_LEDS);
 
   LedStrip::clear();
+  
+  hammock.init(A0);
+  
   counter = 0;
   inStateCounter = 0;
   
@@ -44,7 +48,7 @@ void loop() {
   counter++;
   inStateCounter++;
   
-
+  
 
 
   

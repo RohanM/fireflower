@@ -25,7 +25,7 @@ class LedStrip {
 
 class Hammock {
  public:
-  Hammock(int pin);
+  void init(int pin);
   void update();
 
  private:

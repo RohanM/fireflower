@@ -1,4 +1,4 @@
-Hammock::Hammock(int pin) {
+void Hammock::init(int pin) {
   _pin = pin;
   _minResistance = 50000.0;
   _maxResistance = 0;
