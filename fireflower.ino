@@ -1,5 +1,4 @@
 #include <FastLED.h>
-#include <math.h>
 #include "includes.h"
 
 #define NUM_STRIPS 5

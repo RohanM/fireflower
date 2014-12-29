@@ -33,9 +33,8 @@ class Hammock {
   void updateState();
 
   int _pin;
-  float _maxReading;
-  float _minReading;
-  float _percentReading;
+  float _minResistance;
+  float _maxResistance;
   float _percentStretch;
   int _hammockState;
 };
