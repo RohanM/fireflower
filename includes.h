@@ -30,6 +30,7 @@ class Hammock {
 
  private:
   float readingToResistance(float reading);
+  void updateStretch(float resistance);
   void updateState();
 
   int _pin;

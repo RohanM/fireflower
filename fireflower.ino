@@ -51,19 +51,9 @@ void loop() {
   //ledStrips[0].setLevel((int)( ( (sin(inStateCounter) + 1.0 ) * 0.5) * 50.0));
   
   ledStrips[0].spread(128, counter);
+  
   FastLED.show();
   
-  // CHSV(1, 255, 255)
-
   delay(100);
-  /*
-  for(int i=0; i < NUM_STRIPS; i++) {
-    int proximity = sonarArray.proximity(i);
-
-    ledStrips[i].moveAndIntensify();
-    ledStrips[i].setBottomValue(proximity, allProximitiesClose);
-  }
-  FastLED.show();
-  */
 }
 

@@ -10,19 +10,21 @@ void Hammock::update() {
   reading = analogRead(_pin);
   resistance = this->readingToResistance(reading);
   
-  _minResistance = min(_minResistance, resistance);
-  _maxResistance = max(_maxResistance, resistance);
-  _percentStretch = 1.0 - ((resistance - _minResistance) / (_maxResistance - _minResistance));
+  this->updateStretch(resistance);
+  this->updateState();
 
   Serial.print("Percent of stretch: "); 
   Serial.println(_percentStretch * 100.0);
 }
 
 float Hammock::readingToResistance(float reading) {
-  // TODO: Single return
-  reading = (1023 / reading)  - 1;
-  reading = HAMMOCK_SERIES_RESISTANCE / reading;
-  return reading;
+  return HAMMOCK_SERIES_RESISTANCE / ((1023 / reading)  - 1);
+}
+
+void Hammock::updateStretch(float resistance) {
+  _minResistance = min(_minResistance, resistance);
+  _maxResistance = max(_maxResistance, resistance);
+  _percentStretch = 1.0 - ((resistance - _minResistance) / (_maxResistance - _minResistance));
 }
 
 void Hammock::updateState() {
