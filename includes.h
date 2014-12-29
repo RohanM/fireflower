@@ -1,5 +1,12 @@
 #define NUM_LEDS 50
 
+#define SERIESRESISTOR 10000
+#define THERMISTORPIN A0 
+
+#define STATE_AMBIENT 0
+#define STATE_IN_USE 1
+
+
 class LedStrip {
  public:
   static void clear() { FastLED.clear(); };
@@ -14,5 +21,22 @@ class LedStrip {
   int _index;
   CRGB _leds[NUM_LEDS];
   CRGB _colour;
+};
+
+
+class Hammock {
+ public:
+  Hammock();
+  void update();
+
+ private:
+  float readingToResistance(float reading);
+  void updateState();
+
+  float _maxReading;
+  float _minReading;
+  float _percentReading;
+  float _percentStretch;
+  int _hammockState;
 };
 
