@@ -1,10 +1,9 @@
 #define NUM_LEDS 50
 
-#define SERIESRESISTOR 10000
-#define THERMISTORPIN A0 
+#define HAMMOCK_SERIES_RESISTANCE 10000
 
-#define STATE_AMBIENT 0
-#define STATE_IN_USE 1
+#define HAMMOCK_STATE_VACANT 0
+#define HAMMOCK_STATE_IN_USE 1
 
 
 class LedStrip {
@@ -26,13 +25,14 @@ class LedStrip {
 
 class Hammock {
  public:
-  Hammock();
+  Hammock(int pin);
   void update();
 
  private:
   float readingToResistance(float reading);
   void updateState();
 
+  int _pin;
   float _maxReading;
   float _minReading;
   float _percentReading;

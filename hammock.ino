@@ -1,12 +1,13 @@
-Hammock::Hammock() {
+Hammock::Hammock(int pin) {
+  _pin = pin;
   _minReading = 50000.0;
   _maxReading = 0;
-  _hammockState = STATE_AMBIENT;
+  _hammockState = HAMMOCK_STATE_VACANT;
 }
 
 void Hammock::update() {
   float reading, resistance;
-  reading = analogRead(THERMISTORPIN);
+  reading = analogRead(_pin);
   //Serial.print("Analog reading "); 
   //Serial.println(reading);
  
@@ -32,25 +33,25 @@ void Hammock::update() {
 float Hammock::readingToResistance(float reading) {
   // TODO: Single return
   reading = (1023 / reading)  - 1;
-  reading = SERIESRESISTOR / reading;
+  reading = HAMMOCK_SERIES_RESISTANCE / reading;
   return reading;
 }
 
 void Hammock::updateState() {
   switch (_hammockState) {
-    case STATE_AMBIENT: 
+    case HAMMOCK_STATE_VACANT: 
         //ledStrips[0].setColour(CRGB(255, 0, 0));
         if (_percentStretch > 0.65) { // Transition only if stretched significantly
-          _hammockState = STATE_IN_USE;
-          // Entry activities for STATE_IN_USE
+          _hammockState = HAMMOCK_STATE_IN_USE;
+          // Entry activities for HAMMOCK_STATE_IN_USE
           //inStateCounter = 0;
         }
       break;
-    case STATE_IN_USE: 
+    case HAMMOCK_STATE_IN_USE: 
         //ledStrips[0].setColour(CRGB(0, 255, (int)(percentStretch * 50.0)) );
         if (_percentStretch < 0.35) { // Transition only if relaxed significantly
-          _hammockState = STATE_AMBIENT;
-          // Entry activities for STATE_AMBIENT
+          _hammockState = HAMMOCK_STATE_VACANT;
+          // Entry activities for HAMMOCK_STATE_VACANT
           //inStateCounter = 0;
         }
       break;
