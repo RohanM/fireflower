@@ -22,16 +22,18 @@ void LedStrip::spread(int level, int counter) {
     // When state changes to in use, green colour creeps in from one end and gradually fills the whole strip.
     // Also, the brightness grows up to 100 to 255.
 
-    float brightness = ( rangeSinToOne(cos(percentOfLeds * 6.28 * 4.0 + 3.14 + ((float)counter) / 10.0)) * 155.0 + 100.0;
+    //float brightness = ( rangeSinToOne(cos(percentOfLeds * 6.28 * 4.0 + 3.14 + ((float)counter) / 10.0)) * 155.0 + 100.0;
 
-    //float brightness = ( cos(percentOfLeds * 6.28 * 4.0 + 3.14 + ((float)counter) / 10.0)) + 1.0 / 2.0 * 155.0 + 100.0;
+    float brightness = ( cos(percentOfLeds * 6.28 * 4.0 + 3.14 + ((float)counter) / 10.0)) + 1.0 / 2.0 * 155.0 + 100.0;
     this->_leds[i] = CHSV(100, 200 + (int)((float)i / (float)NUM_LEDS * 55.0), (int)brightness);
   }
 }
 
+/*
 void LedStrip::rangeSinToOne(float in) {
   return (in + 1.0) / 2.0;
 }
+*/
 
 void LedStrip::setColour(CRGB colour) {
   this->_colour = colour;
