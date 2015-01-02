@@ -53,12 +53,11 @@ void loop() {
     ledStrips[0].setColour(CRGB(255, 0, 0));
     ledFillCount = max(0, ledFillCount - 1);
   }
+  float fillRatio = (float)ledFillCount / (float)MAX_LED_FILL;
 
-  ledStrips[0].setLevel((float)ledFillCount / (float)MAX_LED_FILL * 50.0);
+  //ledStrips[0].setLevel((float)ledFillCount / (float)MAX_LED_FILL * 50.0);
 
-  //ledStrips[0].setLevel((int)( ( (sin(inStateCounter) + 1.0 ) * 0.5) * 50.0));
-  
-  //ledStrips[0].spread(clock, 0);
+  ledStrips[0].spread(clock, fillRatio);
   
   FastLED.show();
   

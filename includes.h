@@ -19,6 +19,9 @@ class LedStrip {
   int _index;
   CRGB _leds[NUM_LEDS];
   CRGB _colour;
+
+  float scaleSinToOne(float in);
+  float scaleClockToRads(int clock, int period);
 };
 
 
