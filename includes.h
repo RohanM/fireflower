@@ -12,7 +12,7 @@ class LedStrip {
   
   void init(int index);
   void setLevel(int level);
-  void spread(int level, int counter);
+  void spread(int clock, float fillLevel);
   void setColour(CRGB colour);
   CRGB* leds();
 
@@ -27,6 +27,7 @@ class Hammock {
  public:
   void init(int pin);
   void update();
+  int state() { return _hammockState; };
 
  private:
   float readingToResistance(float reading);

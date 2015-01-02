@@ -13,8 +13,8 @@
 
 
 LedStrip ledStrips[NUM_STRIPS];
-int counter;
-int inStateCounter;
+int clock;
+//int inStateCounter;
 Hammock hammock;
 
 void setup() {
@@ -34,30 +34,35 @@ void setup() {
   
   hammock.init(A0);
   
-  counter = 0;
-  inStateCounter = 0;
-  
+  clock = 0;
+  //inStateCounter = 0;
 
-  
   Serial.begin(9600);
 }
 
 
 void loop() {
-  float reading;
-  counter++;
-  inStateCounter++;
+  //float reading;
+  clock++;
+  //inStateCounter++;
   
   
+  hammock.update();
+  
+  if(hammock.state() == HAMMOCK_STATE_IN_USE) {
+    ledStrips[0].setColour(CRGB(0, 255, 0));
+  } else {
+    ledStrips[0].setColour(CRGB(255, 0, 0));
+  }
 
+  ledStrips[0].setLevel(50);
 
-  
   //ledStrips[0].setLevel((int)( ( (sin(inStateCounter) + 1.0 ) * 0.5) * 50.0));
   
-  ledStrips[0].spread(128, counter);
+  //ledStrips[0].spread(clock, 0);
   
   FastLED.show();
   
-  delay(100);
+  //delay(100);
 }
 
