@@ -18,7 +18,7 @@ void LedStrip::spread(int clock, float fillLevel) {
   for(int i=0; i < NUM_LEDS; i++) {
     this->_leds[i] = CRGB(clock % 255, 0, 0);
   }
-  // In ambient, wavey red, pulsing. Moving sine wave which modulates brightness between ~ 50 to 155.
+  // When hammock unoccupied, wavey red, pulsing. Moving sine wave which modulates brightness between ~ 50 to 155.
   // When state changes to in use, green colour creeps in from one end and gradually fills the whole strip.
   // Also, the brightness grows up to 100 to 255.
 

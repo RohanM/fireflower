@@ -9,13 +9,13 @@
 #define LED_PIN_3 5
 #define LED_PIN_4 6
 
-
+#define MAX_LED_FILL 255
 
 
 LedStrip ledStrips[NUM_STRIPS];
 int clock;
-//int inStateCounter;
 Hammock hammock;
+int ledFillCount;
 
 void setup() {
   for(int i=0; i<NUM_STRIPS; i++) {
@@ -35,27 +35,26 @@ void setup() {
   hammock.init(A0);
   
   clock = 0;
-  //inStateCounter = 0;
+  ledFillCount = 0;
 
   Serial.begin(9600);
 }
 
 
 void loop() {
-  //float reading;
   clock++;
-  //inStateCounter++;
-  
   
   hammock.update();
   
   if(hammock.state() == HAMMOCK_STATE_IN_USE) {
     ledStrips[0].setColour(CRGB(0, 255, 0));
+    ledFillCount = min(MAX_LED_FILL, ledFillCount + 1);
   } else {
     ledStrips[0].setColour(CRGB(255, 0, 0));
+    ledFillCount = max(0, ledFillCount - 1);
   }
 
-  ledStrips[0].setLevel(50);
+  ledStrips[0].setLevel((float)ledFillCount / (float)MAX_LED_FILL * 50.0);
 
   //ledStrips[0].setLevel((int)( ( (sin(inStateCounter) + 1.0 ) * 0.5) * 50.0));
   

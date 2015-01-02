@@ -30,19 +30,17 @@ void Hammock::updateStretch(float resistance) {
 void Hammock::updateState() {
   switch (_hammockState) {
     case HAMMOCK_STATE_VACANT: 
-        //ledStrips[0].setColour(CRGB(255, 0, 0));
         if (_percentStretch > 0.65) { // Transition only if stretched significantly
           _hammockState = HAMMOCK_STATE_IN_USE;
+          
           // Entry activities for HAMMOCK_STATE_IN_USE
-          //inStateCounter = 0;
         }
       break;
     case HAMMOCK_STATE_IN_USE: 
-        //ledStrips[0].setColour(CRGB(0, 255, (int)(percentStretch * 50.0)) );
         if (_percentStretch < 0.35) { // Transition only if relaxed significantly
           _hammockState = HAMMOCK_STATE_VACANT;
+          
           // Entry activities for HAMMOCK_STATE_VACANT
-          //inStateCounter = 0;
         }
       break;
   }

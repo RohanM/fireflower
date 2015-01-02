@@ -5,7 +5,6 @@
 #define HAMMOCK_STATE_VACANT 0
 #define HAMMOCK_STATE_IN_USE 1
 
-
 class LedStrip {
  public:
   static void clear() { FastLED.clear(); };
