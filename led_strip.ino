@@ -20,27 +20,21 @@ void LedStrip::setLevel(int level) {
 // Also, the brightness grows up to between 100 and 255.
 void LedStrip::spread(int clock, float fillLevel) {
   int fillCount = fillLevel * NUM_LEDS;
-  float hue, value;
+  float effect, hue, value;
 
   for(int i=0; i < NUM_LEDS; i++) {
-    value = scaleSinToOne(sin(scaleClockToRads(clock+i, 100)));
+    // Effect ranges from 0 to 1, based on fillCount.
+    effect = (fillCount - i) / 10.0;
+    effect = constrain(effect, 0.0, 1.0);
     
     // Hue level: 25 by default. When it's reached by the fill level, it increases linearly
-    //            to 90 over 20% of NUM_LEDS.
-
-    hue = (fillCount - i) / 10.0; // hue scaled 0-1, unconstrained
-    hue = constrain(hue, 0.0, 1.0);
-    hue = hue * 65 + 25;
-    value = value * 155.0 + 100.0;
-    /*
-    if(fillCount > i) {
-      hue = 90;
-      value = value * 155.0 + 100.0;
-    } else {
-      hue = 25;
-      value = value * 105.0 + 50.0;
-    }
-    */
+    //            to 90 over 20% of NUM_LEDS (10 LEDs).
+    hue = effect * 65 + 25;
+    
+    // Value consists of a sine wave, which is scaled to (50..155) when the effect is disabled,
+    // and to (100..255) when the effect is enabled.
+    value = scaleSinToOne(sin(scaleClockToRads(clock+i, 100)));
+    value = value * (effect * 50.0 + 105.0) + (effect * 50.0 + 50.0);
     
     this->_leds[i] = CHSV(hue, 255, value);
   }
