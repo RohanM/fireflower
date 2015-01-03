@@ -13,9 +13,11 @@ void Hammock::update() {
   this->updateStretch(resistance);
   this->updateState();
 
-  Serial.print("Percent of stretch: "); 
-  Serial.println(_percentStretch * 100.0);
+  //Serial.print("Percent of stretch: ");
+  //Serial.println(_percentStretch * 100.0);
 }
+
+
 
 float Hammock::readingToResistance(float reading) {
   return HAMMOCK_SERIES_RESISTANCE / ((1023 / reading)  - 1);
