@@ -42,12 +42,10 @@ void LedStrip::spread(int clock, float fillLevel) {
 
 
 float LedStrip::scaleSinToOne(float in) {
-  // TODO: map
   return (in + 1.0) / 2.0;
 }
 
 float LedStrip::scaleClockToRads(int clock, int period) {
-  // TODO: map
   return clock / (float)period * 2.0 * PI;
 }
 
