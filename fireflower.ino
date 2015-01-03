@@ -46,21 +46,22 @@ void loop() {
   
   hammock.update();
   
-  if(hammock.state() == HAMMOCK_STATE_IN_USE) {
-    ledStrips[0].setColour(CRGB(0, 255, 0));
-    ledFillCount = min(MAX_LED_FILL, ledFillCount + 1);
-  } else {
-    ledStrips[0].setColour(CRGB(255, 0, 0));
-    ledFillCount = max(0, ledFillCount - 1);
-  }
-  float fillRatio = (float)ledFillCount / (float)MAX_LED_FILL;
-
-  //ledStrips[0].setLevel((float)ledFillCount / (float)MAX_LED_FILL * 50.0);
-
-  ledStrips[0].spread(clock, fillRatio);
+  updateLedFillCount();
+  
+  ledStrips[0].spread(clock, ledFillRatio());
   
   FastLED.show();
   
   //delay(100);
 }
 
+
+void updateLedFillCount() {
+  ledFillCount += (hammock.state() == HAMMOCK_STATE_IN_USE ? 1 : -1);
+  ledFillCount = constrain(ledFillCount, 0, MAX_LED_FILL);
+}
+
+
+float ledFillRatio() {
+  return (float)ledFillCount / (float)MAX_LED_FILL;
+}
