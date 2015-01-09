@@ -1,7 +1,14 @@
 void Hammock::init(int pin) {
   _pin = pin;
-  _minResistance = 50000.0;
-  _maxResistance = 0;
+  
+  if(HAMMOCK_DYNAMIC_CALIBRATION) {
+    _minResistance = 50000.0;
+    _maxResistance = 0;
+  } else {
+    _minResistance = 10;
+    _maxResistance = 1000;
+  }
+  
   _hammockState = HAMMOCK_STATE_VACANT;
 }
 
@@ -24,8 +31,11 @@ float Hammock::readingToResistance(float reading) {
 }
 
 void Hammock::updateStretch(float resistance) {
-  _minResistance = min(_minResistance, resistance);
-  _maxResistance = max(_maxResistance, resistance);
+  if(HAMMOCK_DYNAMIC_CALIBRATION) {
+    _minResistance = min(_minResistance, resistance);
+    _maxResistance = max(_maxResistance, resistance);
+  }
+  
   _percentStretch = 1.0 - ((resistance - _minResistance) / (_maxResistance - _minResistance));
 }
 
