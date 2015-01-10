@@ -1,3 +1,9 @@
+#define EFFECT_NUM_LEDS 39
+
+#define LED_PULSE_SCALE 3 // larger numbers make shorter pulses
+#define LED_PULSE_PERIOD 66 // larger numbers make the pulse move more slowly
+
+
 void LedStrip::init(int index) {
   this->_index = index;
   this->_colour = CRGB(255, 255, 255);
@@ -13,7 +19,6 @@ void LedStrip::setLevel(int level) {
     this->_leds[i] = this->_colour;
   }
 }
-
 
 // When hammock unoccupied, wavey red, pulsing. Moving sine wave which modulates brightness between ~ 50 to 155.
 // When state changes to in use, green colour creeps in from one end and gradually fills the whole strip.
@@ -33,7 +38,7 @@ void LedStrip::spread(int clock, float fillLevel) {
     
     // Value consists of a sine wave, which is scaled to (50..155) when the effect is disabled,
     // and to (100..255) when the effect is enabled.
-    value = scaleSinToOne(sin(scaleClockToRads(clock-i, 100)));
+    value = scaleSinToOne(sin(scaleClockToRads(clock-(i*LED_PULSE_SCALE), LED_PULSE_PERIOD)));
     value = value * (effect * 50.0 + 105.0) + (effect * 50.0 + 50.0);
     
     this->_leds[i] = CHSV(hue, 255, value);
