@@ -22,7 +22,7 @@ void LedStrip::spread(int clock, float fillLevel) {
   int fillCount = fillLevel * NUM_LEDS;
   float effect, hue, value;
 
-  for(int i=0; i < NUM_LEDS; i++) {
+  for(int i=0; i < EFFECT_NUM_LEDS; i++) {
     // Effect ranges from 0 to 1, based on fillCount.
     effect = (fillCount - i) / 10.0;
     effect = constrain(effect, 0.0, 1.0);
@@ -40,6 +40,22 @@ void LedStrip::spread(int clock, float fillLevel) {
   }
 }
 
+// Mirror from the main strip onto the side branches
+void LedStrip::mirror() {
+  copy( 7, 39, 17);
+  copy( 7, 56, 17);
+  copy(25, 72, 12);
+  copy(25, 84, 12);
+}
+
+void LedStrip::copy(int src, int dst, int num) {
+  // Not yet working
+  //memcpy(&this->_leds[src], &this->_leds[dst], num * sizeof(CRGB));
+
+  for(int i=0; i<num; i++) {
+    this->_leds[dst+i] = this->_leds[src+i];
+  }
+}
 
 float LedStrip::scaleSinToOne(float in) {
   return (in + 1.0) / 2.0;

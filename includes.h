@@ -1,4 +1,5 @@
-#define NUM_LEDS 50
+#define NUM_LEDS 97 // 39 + 17 + 17 + 12 + 12
+#define EFFECT_NUM_LEDS 39
 
 #define HAMMOCK_DYNAMIC_CALIBRATION true
 #define HAMMOCK_SERIES_RESISTANCE 10000
@@ -13,6 +14,7 @@ class LedStrip {
   void init(int index);
   void setLevel(int level);
   void spread(int clock, float fillLevel);
+  void mirror();
   void setColour(CRGB colour);
   CRGB* leds();
 
@@ -21,6 +23,7 @@ class LedStrip {
   CRGB _leds[NUM_LEDS];
   CRGB _colour;
 
+  void copy(int src, int dst, int num);
   float scaleSinToOne(float in);
   float scaleClockToRads(int clock, int period);
 };

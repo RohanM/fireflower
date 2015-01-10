@@ -49,10 +49,9 @@ void loop() {
   updateLedFillCount();
   
   ledStrips[0].spread(clock, ledFillRatio());
+  ledStrips[0].mirror();
   
   FastLED.show();
-  
-  //delay(100);
 }
 
 
