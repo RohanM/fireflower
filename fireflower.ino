@@ -9,7 +9,7 @@
 #define LED_PIN_3 5
 #define LED_PIN_4 6
 
-#define MAX_LED_FILL 255
+#define MAX_LED_FILL 1024
 
 
 LedStrip ledStrips[NUM_STRIPS];
