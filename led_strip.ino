@@ -33,7 +33,7 @@ void LedStrip::spread(int clock, float fillLevel) {
     
     // Value consists of a sine wave, which is scaled to (50..155) when the effect is disabled,
     // and to (100..255) when the effect is enabled.
-    value = scaleSinToOne(sin(scaleClockToRads(clock+i, 100)));
+    value = scaleSinToOne(sin(scaleClockToRads(clock-i, 100)));
     value = value * (effect * 50.0 + 105.0) + (effect * 50.0 + 50.0);
     
     this->_leds[i] = CHSV(hue, 255, value);
