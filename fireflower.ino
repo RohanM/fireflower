@@ -42,6 +42,64 @@ void setup() {
 
 
 void loop() {
+  testPatternFullColours();
+  //testPatternProgressiveColours();
+  //doTheRealThing();
+}
+
+void testPatternFullColours() {
+  ledStrips[0].setColour(CRGB(255, 0, 0));
+  ledStrips[0].setLevel(NUM_LEDS-1);
+  FastLED.show();
+  delay(500);
+  
+  ledStrips[0].setColour(CRGB(0, 255, 0));
+  ledStrips[0].setLevel(NUM_LEDS-1);
+  FastLED.show();
+  delay(500);
+
+  ledStrips[0].setColour(CRGB(0, 0, 255));
+  ledStrips[0].setLevel(NUM_LEDS-1);
+  FastLED.show();
+  delay(500);
+
+  ledStrips[0].setColour(CRGB(255, 255, 255));
+  ledStrips[0].setLevel(NUM_LEDS-1);
+  FastLED.show();
+  delay(500);
+}
+
+void testPatternProgressiveColours() {
+  ledStrips[0].setColour(CRGB(255, 0, 0));
+  for(int i=0; i<NUM_LEDS; i++) {
+    ledStrips[0].setLevel(i);
+    FastLED.show();
+    delay(10);
+  }
+  
+  ledStrips[0].setColour(CRGB(0, 255, 0));
+  for(int i=0; i<NUM_LEDS; i++) {
+    ledStrips[0].setLevel(i);
+    FastLED.show();
+    delay(10);
+  }
+  
+  ledStrips[0].setColour(CRGB(0, 0, 255));
+  for(int i=0; i<NUM_LEDS; i++) {
+    ledStrips[0].setLevel(i);
+    FastLED.show();
+    delay(10);
+  }
+  
+  ledStrips[0].setColour(CRGB(255, 255, 255));
+  for(int i=0; i<NUM_LEDS; i++) {
+    ledStrips[0].setLevel(i);
+    FastLED.show();
+    delay(10);
+  }
+}
+
+void doTheRealThing() {
   clock++;
   
   hammock.update();
@@ -51,9 +109,8 @@ void loop() {
   ledStrips[0].spread(clock, ledFillRatio());
   ledStrips[0].mirror();
   
-  FastLED.show();
+  FastLED.show();  
 }
-
 
 void updateLedFillCount() {
   ledFillCount += (hammock.state() == HAMMOCK_STATE_IN_USE ? 1 : -1);

@@ -1,4 +1,4 @@
-#define NUM_LEDS 97 // 39 + 17 + 17 + 12 + 12
+#define NUM_LEDS 98 // 39 + 17 + 17 + 12 + 12 (+1 why?)
 
 #define HAMMOCK_DYNAMIC_CALIBRATION true
 #define HAMMOCK_SERIES_RESISTANCE 10000
